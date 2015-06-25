@@ -7,7 +7,7 @@ import time
 
 
 DIR = 'summer-eval-out-uaz-final2-release'
-index = 'reach4'
+index = 'reach'
 BULK=True
 
 def indexer(index, doctype, pattern, BULK):
@@ -19,6 +19,12 @@ def indexer(index, doctype, pattern, BULK):
 
         operations = []
         for ev in entity['frames']:
+            # Extract the PMCID of the source document and index it
+            doc = ev["frame-id"].split('-')[1]
+
+            assert doc[:3] == 'PMC', "Problem extracting the PMC ID of %s" % ev["frame-id"]
+            ev["PMCID"] = doc
+
             if not BULK:
                 es.index(index=index, doc_type=doctype, body=ev)
             else:
