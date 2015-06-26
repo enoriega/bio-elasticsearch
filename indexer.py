@@ -4,9 +4,9 @@ from elasticsearch.helpers import bulk
 import glob
 import os.path
 import time
+from __init__ import DIR
 
 
-DIR = 'summer-eval-out-uaz-final2-release'
 index = 'reach'
 BULK=True
 
