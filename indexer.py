@@ -7,7 +7,7 @@ import time
 from __init__ import DIR
 
 
-index = 'reach'
+INDEX = 'reach'
 BULK=True
 
 def indexer(index, doctype, pattern, BULK):
@@ -30,7 +30,6 @@ def indexer(index, doctype, pattern, BULK):
             else:
                 ev['_index'] = index
                 ev['_type'] = doctype
-                ev['_ttl'] = '1d'
                 operations.append(ev)
 
         if BULK:
@@ -41,13 +40,13 @@ if __name__ == '__main__':
 
     start = time.time()
     print "Indexing events..."
-    indexer(index, "events", '*.uaz.events.json', BULK)
+    indexer(INDEX, "events", '*.uaz.events.json', BULK)
 
     print "Indexing entities..."
-    indexer(index, "entities", '*.uaz.entities.json', BULK)
+    indexer(INDEX, "entities", '*.uaz.entities.json', BULK)
 
     print "Indexing sentences..."
-    indexer(index, "sentences", '*.uaz.sentences.json', BULK)
+    indexer(INDEX, "sentences", '*.uaz.sentences.json', BULK)
 
     end = time.time()
 
